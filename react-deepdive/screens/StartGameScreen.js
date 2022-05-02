@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Alert } from "react-native";
+import Card from "../components/ui/Card";
+import { InstructionText } from "../components/ui/InstructionText";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 
 const StartGameScreen = ({ onPickedNumber }) => {
@@ -18,8 +21,10 @@ const StartGameScreen = ({ onPickedNumber }) => {
     onPickedNumber(chosenNumber);
   };
   return (
-    <View>
-      <View style={styles.inputContainer}>
+    <View style={styles.rootContainer}>
+      <Title>Guess my game</Title>
+      <Card>
+        <InstructionText>Enter a Number</InstructionText>
         <TextInput
           style={styles.numberInput}
           maxLength={2}
@@ -37,7 +42,7 @@ const StartGameScreen = ({ onPickedNumber }) => {
             <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
           </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -45,19 +50,10 @@ const StartGameScreen = ({ onPickedNumber }) => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+  rootContainer: {
+    flex: 1,
     marginTop: 100,
-    padding: 16,
-    backgroundColor: Colors.primary800,
-    marginHorizontal: 24,
-    borderRadius: 6,
-    elevation: 4,
-    shadowColor: "black", //For box shadow ANDROID
-    shadowOffset: { width: 0, height: 2 }, //For APPLE IOS
-    shadowRadius: 6, //FOR IOS
-    shadowOpacity: 0.25, //FOR IOS
+    alignItems: "center", // default stying is stretch which causes the element to strecth
   },
   numberInput: {
     height: 50,
