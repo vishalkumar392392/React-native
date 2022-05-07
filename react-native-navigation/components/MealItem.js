@@ -7,15 +7,23 @@ import {
   Platform,
 } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
+
 export default MealItem = ({ item }) => {
-  const { title, imageUrl, affordability, complexity, duration } = item;
+  const { id, title, imageUrl, affordability, complexity, duration } = item;
+
+  const navigation = useNavigation();
+  const pressHandler = (item) => {
+    navigation.navigate("MealDetailScreen", {
+      mealId: id,
+    });
+  };
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
-        style={({ pressed }) => [
-          pressed ? styles.buttonPressed : null
-        ]}
+        style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
+        onPress={() => pressHandler(item)}
       >
         <View>
           <Image source={{ uri: imageUrl }} style={styles.image} />
