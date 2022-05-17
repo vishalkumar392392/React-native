@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useContext, useEffect, useState } from "react";
 import ExpensesOutput from "../components/Expenses/ExpensesOutput";
 import { ExpensesContext } from "../store/expenses-context";
 import { getDateMinusDays } from "../util/date";
+import { fetchExpenses } from "../util/http";
 
 const RecentExpenses = () => {
   const expensesCtx = useContext(ExpensesContext);
@@ -11,6 +13,26 @@ const RecentExpenses = () => {
     const date7daysAgo = getDateMinusDays(today, 7);
     return expense.date >= date7daysAgo && expense.date <= today;
   });
+
+  // useEffect(() => {
+  //   const getExpenses = async () => {
+  //     const expenses = await fetchExpenses();
+  //     expensesCtx.setExpenses(expenses);
+  //   };
+
+  //   getExpenses();
+  // }, []);
+
+  useFocusEffect(
+    useCallback(()=>{
+      const getExpenses = async () => {
+        const expenses = await fetchExpenses();
+        expensesCtx.setExpenses(expenses);
+      };
+
+      getExpenses();
+    }, [])
+  )
 
   return (
     <ExpensesOutput
