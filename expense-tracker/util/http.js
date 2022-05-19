@@ -22,3 +22,11 @@ export const fetchExpenses = async () => {
   }
   return expenses;
 };
+
+export const updateExxpense = (id, expenseData) => {
+  return axios.put(BASIC_URL + `/expenses/${id}.json`, expenseData);
+};
+
+export const deleteExpense = (id) => {
+  return axios.delete(BASIC_URL + `/expenses/${id}.json`);
+};

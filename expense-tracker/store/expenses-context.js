@@ -43,7 +43,6 @@ function ExpensesContextProvider({ children }) {
   }
 
   function setExpenses(expenses) {
-    console.log("called");
     dispatch({ type: "SET", payload: expenses });
   }
 
